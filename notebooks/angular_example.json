@@ -72,40 +72,6 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%angular\n\u003cstyle\u003e\n\nbody {\n  max-width: 960px;\n  margin: 1px;\n}\n\ndiv {\n  width: 10px;\n  height: 10px;\n  margin: 1px 0 0 1px;\n  float: left;\n  background: #eee;\n  display: inline-block;\n}\n\n\u003c/style\u003e\n\u003cbody\u003e\n\u003cscript src\u003d\"https://d3js.org/d3.v4.0.0-alpha.24.min.js\"\u003e\u003c/script\u003e\n\u003cscript\u003e\n\nvar n \u003d 4002;\n\nvar whiteblue \u003d d3.interpolateRgb(\"#eee\", \"steelblue\"),\n    blueorange \u003d d3.interpolateRgb(\"steelblue\", \"orange\"),\n    orangewhite \u003d d3.interpolateRgb(\"orange\", \"#eee\");\n\nd3.select(\"body\").selectAll(\"div\")\n    .data(d3.range(n))\n  .enter().append(\"div\")\n  .transition()\n    .delay(function(d, i) { return i + Math.random() * n / 4; })\n    .ease(d3.easeLinear)\n    .on(\"start\", function repeat() {\n        d3.active(this)\n            .styleTween(\"background-color\", function() { return whiteblue; })\n          .transition()\n            .delay(1000)\n            .styleTween(\"background-color\", function() { return blueorange; })\n          .transition()\n            .delay(1000)\n            .styleTween(\"background-color\", function() { return orangewhite; })\n          .transition()\n            .delay(n)\n            .on(\"start\", repeat);\n      });\n\n\u003c/script\u003e\n",
-      "dateUpdated": "Aug 2, 2016 9:42:14 PM",
-      "config": {
-        "colWidth": 12.0,
-        "graph": {
-          "mode": "table",
-          "height": 300.0,
-          "optionOpen": false,
-          "keys": [],
-          "values": [],
-          "groups": [],
-          "scatter": {}
-        },
-        "enabled": true,
-        "editorMode": "ace/mode/scala"
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "jobName": "paragraph_1470174117304_1571468284",
-      "id": "20160802-214157_1851159592",
-      "result": {
-        "code": "SUCCESS",
-        "type": "ANGULAR",
-        "msg": "\u003cstyle\u003e\n\nbody {\n  max-width: 960px;\n  margin: 1px;\n}\n\ndiv {\n  width: 10px;\n  height: 10px;\n  margin: 1px 0 0 1px;\n  float: left;\n  background: #eee;\n  display: inline-block;\n}\n\n\u003c/style\u003e\n\u003cbody\u003e\n\u003cscript src\u003d\"https://d3js.org/d3.v4.0.0-alpha.24.min.js\"\u003e\u003c/script\u003e\n\u003cscript\u003e\n\nvar n \u003d 4002;\n\nvar whiteblue \u003d d3.interpolateRgb(\"#eee\", \"steelblue\"),\n    blueorange \u003d d3.interpolateRgb(\"steelblue\", \"orange\"),\n    orangewhite \u003d d3.interpolateRgb(\"orange\", \"#eee\");\n\nd3.select(\"body\").selectAll(\"div\")\n    .data(d3.range(n))\n  .enter().append(\"div\")\n  .transition()\n    .delay(function(d, i) { return i + Math.random() * n / 4; })\n    .ease(d3.easeLinear)\n    .on(\"start\", function repeat() {\n        d3.active(this)\n            .styleTween(\"background-color\", function() { return whiteblue; })\n          .transition()\n            .delay(1000)\n            .styleTween(\"background-color\", function() { return blueorange; })\n          .transition()\n            .delay(1000)\n            .styleTween(\"background-color\", function() { return orangewhite; })\n          .transition()\n            .delay(n)\n            .on(\"start\", repeat);\n      });\n\n\u003c/script\u003e"
-      },
-      "dateCreated": "Aug 2, 2016 9:41:57 PM",
-      "dateStarted": "Aug 2, 2016 9:42:14 PM",
-      "dateFinished": "Aug 2, 2016 9:42:14 PM",
-      "status": "FINISHED",
-      "progressUpdateIntervalMs": 500
-    },
-    {
       "title": "Bubble Chart",
       "text": "%angular\n\n\u003cstyle\u003e\n#myBubble {\n  font: 10px sans-serif;\n}\n\u003c/style\u003e\n\n\u003cdiv id\u003d\"myBubble\"\u003e\u003c/div\u003e\n\u003cscript\u003e\n\nvar diameter \u003d 960,\n    format \u003d d3.format(\",d\"),\n    color \u003d d3.scale.category20c();\n\nvar bubble \u003d d3.layout.pack()\n    .sort(null)\n    .size([diameter, diameter])\n    .padding(1.5);\n\nvar svg \u003d d3.select(\"#myBubble\").append(\"svg\")\n    .attr(\"width\", diameter)\n    .attr(\"height\", diameter)\n    .attr(\"class\", \"bubble\");\n\nd3.json(\"https://gist.githubusercontent.com/mbostock/4063269/raw/e87e5bbd6ba610d3f693dd42c00c7fc583fda5aa/flare.json\", function(error, root) {\n  if (error) throw error;\n\n  var node \u003d svg.selectAll(\".node\")\n      .data(bubble.nodes(classes(root))\n      .filter(function(d) { return !d.children; }))\n    .enter().append(\"g\")\n      .attr(\"class\", \"node\")\n      .attr(\"transform\", function(d) { return \"translate(\" + d.x + \",\" + d.y + \")\"; });\n\n  node.append(\"title\")\n      .text(function(d) { return d.className + \": \" + format(d.value); });\n\n  node.append(\"circle\")\n      .attr(\"r\", function(d) { return d.r; })\n      .style(\"fill\", function(d) { return color(d.packageName); });\n\n  node.append(\"text\")\n      .attr(\"dy\", \".3em\")\n      .style(\"text-anchor\", \"middle\")\n      .text(function(d) { return d.className.substring(0, d.r / 3); });\n});\n\n// Returns a flattened hierarchy containing all leaf nodes under the root.\nfunction classes(root) {\n  var classes \u003d [];\n\n  function recurse(name, node) {\n    if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });\n    else classes.push({packageName: name, className: node.name, value: node.size});\n  }\n\n  recurse(null, root);\n  return {children: classes};\n}\n\nd3.select(self.frameElement).style(\"height\", diameter + \"px\");\n\n\u003c/script\u003e",
       "dateUpdated": "Aug 2, 2016 9:40:20 PM",
