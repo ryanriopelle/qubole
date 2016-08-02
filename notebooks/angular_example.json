@@ -35,14 +35,159 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "config": {},
+      "title": "Chord Diagram",
+      "text": "%angular\n\n\u003cstyle\u003e\n#myGraph {\n  font: 10px sans-serif;\n  width: 960px;\n  height: 500px;\n  margin: auto;\n}\n\n.chord path {\n  fill-opacity: .67;\n  stroke: #000;\n  stroke-width: .5px;\n}\n\n\u003c/style\u003e\n\n\u003cdiv id\u003d\"myGraph\"\u003e\u003c/div\u003e\n\u003cscript\u003e\n\n// From http://mkweb.bcgsc.ca/circos/guide/tables/\nvar matrix \u003d [\n  [11975,  5871, 8916, 2868],\n  [ 1951, 10048, 2060, 6171],\n  [ 8010, 16145, 8090, 8045],\n  [ 1013,   990,  940, 6907]\n];\n\nvar chord \u003d d3.layout.chord()\n    .padding(.05)\n    .sortSubgroups(d3.descending)\n    .matrix(matrix);\n\nvar width \u003d 960,\n    height \u003d 500\n    innerRadius \u003d Math.min(width, height) * .41,\n    outerRadius \u003d innerRadius * 1.1;\n\nvar fill \u003d d3.scale.ordinal()\n    .domain(d3.range(4))\n    .range([\"#000000\", \"#FFDD89\", \"#957244\", \"#F26223\"]);\n\nvar svg \u003d d3.select(\"#myGraph\").append(\"svg\")\n    .attr(\"width\", width)\n    .attr(\"height\", height)\n  .append(\"g\")\n    .attr(\"transform\", \"translate(\" + width / 2 + \",\" + height / 2 + \")\");\n\nsvg.append(\"g\").selectAll(\"path\")\n    .data(chord.groups)\n  .enter().append(\"path\")\n    .style(\"fill\", function(d) { return fill(d.index); })\n    .style(\"stroke\", function(d) { return fill(d.index); })\n    .attr(\"d\", d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius))\n    .on(\"mouseover\", fade(.1))\n    .on(\"mouseout\", fade(1));\n\nvar ticks \u003d svg.append(\"g\").selectAll(\"g\")\n    .data(chord.groups)\n  .enter().append(\"g\").selectAll(\"g\")\n    .data(groupTicks)\n  .enter().append(\"g\")\n    .attr(\"transform\", function(d) {\n      return \"rotate(\" + (d.angle * 180 / Math.PI - 90) + \")\"\n          + \"translate(\" + outerRadius + \",0)\";\n    });\n\nticks.append(\"line\")\n    .attr(\"x1\", 1)\n    .attr(\"y1\", 0)\n    .attr(\"x2\", 5)\n    .attr(\"y2\", 0)\n    .style(\"stroke\", \"#000\");\n\nticks.append(\"text\")\n    .attr(\"x\", 8)\n    .attr(\"dy\", \".35em\")\n    .attr(\"transform\", function(d) { return d.angle \u003e Math.PI ? \"rotate(180)translate(-16)\" : null; })\n    .style(\"text-anchor\", function(d) { return d.angle \u003e Math.PI ? \"end\" : null; })\n    .text(function(d) { return d.label; });\n\nsvg.append(\"g\")\n    .attr(\"class\", \"chord\")\n  .selectAll(\"path\")\n    .data(chord.chords)\n  .enter().append(\"path\")\n    .attr(\"d\", d3.svg.chord().radius(innerRadius))\n    .style(\"fill\", function(d) { return fill(d.target.index); })\n    .style(\"opacity\", 1);\n\n// Returns an array of tick angles and labels, given a group.\nfunction groupTicks(d) {\n  var k \u003d (d.endAngle - d.startAngle) / d.value;\n  return d3.range(0, d.value, 1000).map(function(v, i) {\n    return {\n      angle: v * k + d.startAngle,\n      label: i % 5 ? null : v / 1000 + \"k\"\n    };\n  });\n}\n\n// Returns an event handler for fading a given chord group.\nfunction fade(opacity) {\n  return function(g, i) {\n    svg.selectAll(\".chord path\")\n        .filter(function(d) { return d.source.index !\u003d i \u0026\u0026 d.target.index !\u003d i; })\n      .transition()\n        .style(\"opacity\", opacity);\n  };\n}\n\n\u003c/script\u003e",
+      "dateUpdated": "Aug 2, 2016 9:26:22 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "editorHide": true,
+        "title": true
+      },
       "settings": {
         "params": {},
         "forms": {}
       },
       "jobName": "paragraph_1470111649384_-1096102521",
       "id": "20160802-042049_1146289249",
+      "result": {
+        "code": "SUCCESS",
+        "type": "ANGULAR",
+        "msg": "\u003cstyle\u003e\n#myGraph {\n  font: 10px sans-serif;\n  width: 960px;\n  height: 500px;\n  margin: auto;\n}\n\n.chord path {\n  fill-opacity: .67;\n  stroke: #000;\n  stroke-width: .5px;\n}\n\n\u003c/style\u003e\n\n\u003cdiv id\u003d\"myGraph\"\u003e\u003c/div\u003e\n\u003cscript\u003e\n\n// From http://mkweb.bcgsc.ca/circos/guide/tables/\nvar matrix \u003d [\n  [11975,  5871, 8916, 2868],\n  [ 1951, 10048, 2060, 6171],\n  [ 8010, 16145, 8090, 8045],\n  [ 1013,   990,  940, 6907]\n];\n\nvar chord \u003d d3.layout.chord()\n    .padding(.05)\n    .sortSubgroups(d3.descending)\n    .matrix(matrix);\n\nvar width \u003d 960,\n    height \u003d 500\n    innerRadius \u003d Math.min(width, height) * .41,\n    outerRadius \u003d innerRadius * 1.1;\n\nvar fill \u003d d3.scale.ordinal()\n    .domain(d3.range(4))\n    .range([\"#000000\", \"#FFDD89\", \"#957244\", \"#F26223\"]);\n\nvar svg \u003d d3.select(\"#myGraph\").append(\"svg\")\n    .attr(\"width\", width)\n    .attr(\"height\", height)\n  .append(\"g\")\n    .attr(\"transform\", \"translate(\" + width / 2 + \",\" + height / 2 + \")\");\n\nsvg.append(\"g\").selectAll(\"path\")\n    .data(chord.groups)\n  .enter().append(\"path\")\n    .style(\"fill\", function(d) { return fill(d.index); })\n    .style(\"stroke\", function(d) { return fill(d.index); })\n    .attr(\"d\", d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius))\n    .on(\"mouseover\", fade(.1))\n    .on(\"mouseout\", fade(1));\n\nvar ticks \u003d svg.append(\"g\").selectAll(\"g\")\n    .data(chord.groups)\n  .enter().append(\"g\").selectAll(\"g\")\n    .data(groupTicks)\n  .enter().append(\"g\")\n    .attr(\"transform\", function(d) {\n      return \"rotate(\" + (d.angle * 180 / Math.PI - 90) + \")\"\n          + \"translate(\" + outerRadius + \",0)\";\n    });\n\nticks.append(\"line\")\n    .attr(\"x1\", 1)\n    .attr(\"y1\", 0)\n    .attr(\"x2\", 5)\n    .attr(\"y2\", 0)\n    .style(\"stroke\", \"#000\");\n\nticks.append(\"text\")\n    .attr(\"x\", 8)\n    .attr(\"dy\", \".35em\")\n    .attr(\"transform\", function(d) { return d.angle \u003e Math.PI ? \"rotate(180)translate(-16)\" : null; })\n    .style(\"text-anchor\", function(d) { return d.angle \u003e Math.PI ? \"end\" : null; })\n    .text(function(d) { return d.label; });\n\nsvg.append(\"g\")\n    .attr(\"class\", \"chord\")\n  .selectAll(\"path\")\n    .data(chord.chords)\n  .enter().append(\"path\")\n    .attr(\"d\", d3.svg.chord().radius(innerRadius))\n    .style(\"fill\", function(d) { return fill(d.target.index); })\n    .style(\"opacity\", 1);\n\n// Returns an array of tick angles and labels, given a group.\nfunction groupTicks(d) {\n  var k \u003d (d.endAngle - d.startAngle) / d.value;\n  return d3.range(0, d.value, 1000).map(function(v, i) {\n    return {\n      angle: v * k + d.startAngle,\n      label: i % 5 ? null : v / 1000 + \"k\"\n    };\n  });\n}\n\n// Returns an event handler for fading a given chord group.\nfunction fade(opacity) {\n  return function(g, i) {\n    svg.selectAll(\".chord path\")\n        .filter(function(d) { return d.source.index !\u003d i \u0026\u0026 d.target.index !\u003d i; })\n      .transition()\n        .style(\"opacity\", opacity);\n  };\n}\n\n\u003c/script\u003e"
+      },
       "dateCreated": "Aug 2, 2016 4:20:49 AM",
+      "dateStarted": "Aug 2, 2016 9:26:22 PM",
+      "dateFinished": "Aug 2, 2016 9:26:22 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%angular\n\u003cstyle\u003e\n\nbody {\n  max-width: 960px;\n  margin: 1px;\n}\n\ndiv {\n  width: 10px;\n  height: 10px;\n  margin: 1px 0 0 1px;\n  float: left;\n  background: #eee;\n  display: inline-block;\n}\n\n\u003c/style\u003e\n\u003cbody\u003e\n\u003cscript src\u003d\"https://d3js.org/d3.v4.0.0-alpha.24.min.js\"\u003e\u003c/script\u003e\n\u003cscript\u003e\n\nvar n \u003d 4002;\n\nvar whiteblue \u003d d3.interpolateRgb(\"#eee\", \"steelblue\"),\n    blueorange \u003d d3.interpolateRgb(\"steelblue\", \"orange\"),\n    orangewhite \u003d d3.interpolateRgb(\"orange\", \"#eee\");\n\nd3.select(\"body\").selectAll(\"div\")\n    .data(d3.range(n))\n  .enter().append(\"div\")\n  .transition()\n    .delay(function(d, i) { return i + Math.random() * n / 4; })\n    .ease(d3.easeLinear)\n    .on(\"start\", function repeat() {\n        d3.active(this)\n            .styleTween(\"background-color\", function() { return whiteblue; })\n          .transition()\n            .delay(1000)\n            .styleTween(\"background-color\", function() { return blueorange; })\n          .transition()\n            .delay(1000)\n            .styleTween(\"background-color\", function() { return orangewhite; })\n          .transition()\n            .delay(n)\n            .on(\"start\", repeat);\n      });\n\n\u003c/script\u003e\n",
+      "dateUpdated": "Aug 2, 2016 9:42:14 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1470174117304_1571468284",
+      "id": "20160802-214157_1851159592",
+      "result": {
+        "code": "SUCCESS",
+        "type": "ANGULAR",
+        "msg": "\u003cstyle\u003e\n\nbody {\n  max-width: 960px;\n  margin: 1px;\n}\n\ndiv {\n  width: 10px;\n  height: 10px;\n  margin: 1px 0 0 1px;\n  float: left;\n  background: #eee;\n  display: inline-block;\n}\n\n\u003c/style\u003e\n\u003cbody\u003e\n\u003cscript src\u003d\"https://d3js.org/d3.v4.0.0-alpha.24.min.js\"\u003e\u003c/script\u003e\n\u003cscript\u003e\n\nvar n \u003d 4002;\n\nvar whiteblue \u003d d3.interpolateRgb(\"#eee\", \"steelblue\"),\n    blueorange \u003d d3.interpolateRgb(\"steelblue\", \"orange\"),\n    orangewhite \u003d d3.interpolateRgb(\"orange\", \"#eee\");\n\nd3.select(\"body\").selectAll(\"div\")\n    .data(d3.range(n))\n  .enter().append(\"div\")\n  .transition()\n    .delay(function(d, i) { return i + Math.random() * n / 4; })\n    .ease(d3.easeLinear)\n    .on(\"start\", function repeat() {\n        d3.active(this)\n            .styleTween(\"background-color\", function() { return whiteblue; })\n          .transition()\n            .delay(1000)\n            .styleTween(\"background-color\", function() { return blueorange; })\n          .transition()\n            .delay(1000)\n            .styleTween(\"background-color\", function() { return orangewhite; })\n          .transition()\n            .delay(n)\n            .on(\"start\", repeat);\n      });\n\n\u003c/script\u003e"
+      },
+      "dateCreated": "Aug 2, 2016 9:41:57 PM",
+      "dateStarted": "Aug 2, 2016 9:42:14 PM",
+      "dateFinished": "Aug 2, 2016 9:42:14 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Bubble Chart",
+      "text": "%angular\n\n\u003cstyle\u003e\n#myBubble {\n  font: 10px sans-serif;\n}\n\u003c/style\u003e\n\n\u003cdiv id\u003d\"myBubble\"\u003e\u003c/div\u003e\n\u003cscript\u003e\n\nvar diameter \u003d 960,\n    format \u003d d3.format(\",d\"),\n    color \u003d d3.scale.category20c();\n\nvar bubble \u003d d3.layout.pack()\n    .sort(null)\n    .size([diameter, diameter])\n    .padding(1.5);\n\nvar svg \u003d d3.select(\"#myBubble\").append(\"svg\")\n    .attr(\"width\", diameter)\n    .attr(\"height\", diameter)\n    .attr(\"class\", \"bubble\");\n\nd3.json(\"https://gist.githubusercontent.com/mbostock/4063269/raw/e87e5bbd6ba610d3f693dd42c00c7fc583fda5aa/flare.json\", function(error, root) {\n  if (error) throw error;\n\n  var node \u003d svg.selectAll(\".node\")\n      .data(bubble.nodes(classes(root))\n      .filter(function(d) { return !d.children; }))\n    .enter().append(\"g\")\n      .attr(\"class\", \"node\")\n      .attr(\"transform\", function(d) { return \"translate(\" + d.x + \",\" + d.y + \")\"; });\n\n  node.append(\"title\")\n      .text(function(d) { return d.className + \": \" + format(d.value); });\n\n  node.append(\"circle\")\n      .attr(\"r\", function(d) { return d.r; })\n      .style(\"fill\", function(d) { return color(d.packageName); });\n\n  node.append(\"text\")\n      .attr(\"dy\", \".3em\")\n      .style(\"text-anchor\", \"middle\")\n      .text(function(d) { return d.className.substring(0, d.r / 3); });\n});\n\n// Returns a flattened hierarchy containing all leaf nodes under the root.\nfunction classes(root) {\n  var classes \u003d [];\n\n  function recurse(name, node) {\n    if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });\n    else classes.push({packageName: name, className: node.name, value: node.size});\n  }\n\n  recurse(null, root);\n  return {children: classes};\n}\n\nd3.select(self.frameElement).style(\"height\", diameter + \"px\");\n\n\u003c/script\u003e",
+      "dateUpdated": "Aug 2, 2016 9:40:20 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1470172310380_921284803",
+      "id": "20160802-211150_1295483961",
+      "result": {
+        "code": "SUCCESS",
+        "type": "ANGULAR",
+        "msg": "\u003cstyle\u003e\n#myBubble {\n  font: 10px sans-serif;\n}\n\u003c/style\u003e\n\n\u003cdiv id\u003d\"myBubble\"\u003e\u003c/div\u003e\n\u003cscript\u003e\n\nvar diameter \u003d 960,\n    format \u003d d3.format(\",d\"),\n    color \u003d d3.scale.category20c();\n\nvar bubble \u003d d3.layout.pack()\n    .sort(null)\n    .size([diameter, diameter])\n    .padding(1.5);\n\nvar svg \u003d d3.select(\"#myBubble\").append(\"svg\")\n    .attr(\"width\", diameter)\n    .attr(\"height\", diameter)\n    .attr(\"class\", \"bubble\");\n\nd3.json(\"https://gist.githubusercontent.com/mbostock/4063269/raw/e87e5bbd6ba610d3f693dd42c00c7fc583fda5aa/flare.json\", function(error, root) {\n  if (error) throw error;\n\n  var node \u003d svg.selectAll(\".node\")\n      .data(bubble.nodes(classes(root))\n      .filter(function(d) { return !d.children; }))\n    .enter().append(\"g\")\n      .attr(\"class\", \"node\")\n      .attr(\"transform\", function(d) { return \"translate(\" + d.x + \",\" + d.y + \")\"; });\n\n  node.append(\"title\")\n      .text(function(d) { return d.className + \": \" + format(d.value); });\n\n  node.append(\"circle\")\n      .attr(\"r\", function(d) { return d.r; })\n      .style(\"fill\", function(d) { return color(d.packageName); });\n\n  node.append(\"text\")\n      .attr(\"dy\", \".3em\")\n      .style(\"text-anchor\", \"middle\")\n      .text(function(d) { return d.className.substring(0, d.r / 3); });\n});\n\n// Returns a flattened hierarchy containing all leaf nodes under the root.\nfunction classes(root) {\n  var classes \u003d [];\n\n  function recurse(name, node) {\n    if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });\n    else classes.push({packageName: name, className: node.name, value: node.size});\n  }\n\n  recurse(null, root);\n  return {children: classes};\n}\n\nd3.select(self.frameElement).style(\"height\", diameter + \"px\");\n\n\u003c/script\u003e"
+      },
+      "dateCreated": "Aug 2, 2016 9:11:50 PM",
+      "dateStarted": "Aug 2, 2016 9:40:20 PM",
+      "dateFinished": "Aug 2, 2016 9:40:20 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Calendar Example",
+      "text": "%angular\n\u003cstyle\u003e\n#myCal {\n  font: 10px sans-serif;\n  shape-rendering: crispEdges;\n}\n.day {\n  fill: #fff;\n  stroke: #ccc;\n}\n\n.month {\n  fill: none;\n  stroke: #000;\n  stroke-width: 2px;\n}\n\n.RdYlGn .q0-11{fill:rgb(165,0,38)}\n.RdYlGn .q1-11{fill:rgb(215,48,39)}\n.RdYlGn .q2-11{fill:rgb(244,109,67)}\n.RdYlGn .q3-11{fill:rgb(253,174,97)}\n.RdYlGn .q4-11{fill:rgb(254,224,139)}\n.RdYlGn .q5-11{fill:rgb(255,255,191)}\n.RdYlGn .q6-11{fill:rgb(217,239,139)}\n.RdYlGn .q7-11{fill:rgb(166,217,106)}\n.RdYlGn .q8-11{fill:rgb(102,189,99)}\n.RdYlGn .q9-11{fill:rgb(26,152,80)}\n.RdYlGn .q10-11{fill:rgb(0,104,55)}\n\n\u003c/style\u003e\n\u003cdiv id\u003d\"myCal\"\u003e\u003c/div\u003e\n\u003cscript\u003e\n\nvar width \u003d 960,\n    height \u003d 136,\n    cellSize \u003d 17; // cell size\n\nvar percent \u003d d3.format(\".1%\"),\n    format \u003d d3.time.format(\"%Y-%m-%d\");\n\nvar color \u003d d3.scale.quantize()\n    .domain([-.05, .05])\n    .range(d3.range(11).map(function(d) { return \"q\" + d + \"-11\"; }));\n\nvar svg \u003d d3.select(\"#myCal\").selectAll(\"svg\")\n    .data(d3.range(1990, 2011))\n  .enter().append(\"svg\")\n    .attr(\"width\", width)\n    .attr(\"height\", height)\n    .attr(\"class\", \"RdYlGn\")\n  .append(\"g\")\n    .attr(\"transform\", \"translate(\" + ((width - cellSize * 53) / 2) + \",\" + (height - cellSize * 7 - 1) + \")\");\n\nsvg.append(\"text\")\n    .attr(\"transform\", \"translate(-6,\" + cellSize * 3.5 + \")rotate(-90)\")\n    .style(\"text-anchor\", \"middle\")\n    .text(function(d) { return d; });\n\nvar rect \u003d svg.selectAll(\".day\")\n    .data(function(d) { return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })\n  .enter().append(\"rect\")\n    .attr(\"class\", \"day\")\n    .attr(\"width\", cellSize)\n    .attr(\"height\", cellSize)\n    .attr(\"x\", function(d) { return d3.time.weekOfYear(d) * cellSize; })\n    .attr(\"y\", function(d) { return d.getDay() * cellSize; })\n    .datum(format);\n\nrect.append(\"title\")\n    .text(function(d) { return d; });\n\nsvg.selectAll(\".month\")\n    .data(function(d) { return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })\n  .enter().append(\"path\")\n    .attr(\"class\", \"month\")\n    .attr(\"d\", monthPath);\n\nd3.csv(\"https://gist.githubusercontent.com/mbostock/4063318/raw/c0923c4d3d8a6b693bb5c384bce33fc0374486f2/dji.csv\", function(error, csv) {\n  if (error) throw error;\n\n  var data \u003d d3.nest()\n    .key(function(d) { return d.Date; })\n    .rollup(function(d) { return (d[0].Close - d[0].Open) / d[0].Open; })\n    .map(csv);\n\n  rect.filter(function(d) { return d in data; })\n      .attr(\"class\", function(d) { return \"day \" + color(data[d]); })\n    .select(\"title\")\n      .text(function(d) { return d + \": \" + percent(data[d]); });\n});\n\nfunction monthPath(t0) {\n  var t1 \u003d new Date(t0.getFullYear(), t0.getMonth() + 1, 0),\n      d0 \u003d t0.getDay(), w0 \u003d d3.time.weekOfYear(t0),\n      d1 \u003d t1.getDay(), w1 \u003d d3.time.weekOfYear(t1);\n  return \"M\" + (w0 + 1) * cellSize + \",\" + d0 * cellSize\n      + \"H\" + w0 * cellSize + \"V\" + 7 * cellSize\n      + \"H\" + w1 * cellSize + \"V\" + (d1 + 1) * cellSize\n      + \"H\" + (w1 + 1) * cellSize + \"V\" + 0\n      + \"H\" + (w0 + 1) * cellSize + \"Z\";\n}\n\n\u003c/script\u003e",
+      "dateUpdated": "Aug 2, 2016 9:40:35 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala",
+        "editorHide": true,
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1470171368979_1631017352",
+      "id": "20160802-205608_1833602767",
+      "result": {
+        "code": "SUCCESS",
+        "type": "ANGULAR",
+        "msg": "\u003cstyle\u003e\n#myCal {\n  font: 10px sans-serif;\n  shape-rendering: crispEdges;\n}\n.day {\n  fill: #fff;\n  stroke: #ccc;\n}\n\n.month {\n  fill: none;\n  stroke: #000;\n  stroke-width: 2px;\n}\n\n.RdYlGn .q0-11{fill:rgb(165,0,38)}\n.RdYlGn .q1-11{fill:rgb(215,48,39)}\n.RdYlGn .q2-11{fill:rgb(244,109,67)}\n.RdYlGn .q3-11{fill:rgb(253,174,97)}\n.RdYlGn .q4-11{fill:rgb(254,224,139)}\n.RdYlGn .q5-11{fill:rgb(255,255,191)}\n.RdYlGn .q6-11{fill:rgb(217,239,139)}\n.RdYlGn .q7-11{fill:rgb(166,217,106)}\n.RdYlGn .q8-11{fill:rgb(102,189,99)}\n.RdYlGn .q9-11{fill:rgb(26,152,80)}\n.RdYlGn .q10-11{fill:rgb(0,104,55)}\n\n\u003c/style\u003e\n\u003cdiv id\u003d\"myCal\"\u003e\u003c/div\u003e\n\u003cscript\u003e\n\nvar width \u003d 960,\n    height \u003d 136,\n    cellSize \u003d 17; // cell size\n\nvar percent \u003d d3.format(\".1%\"),\n    format \u003d d3.time.format(\"%Y-%m-%d\");\n\nvar color \u003d d3.scale.quantize()\n    .domain([-.05, .05])\n    .range(d3.range(11).map(function(d) { return \"q\" + d + \"-11\"; }));\n\nvar svg \u003d d3.select(\"#myCal\").selectAll(\"svg\")\n    .data(d3.range(1990, 2011))\n  .enter().append(\"svg\")\n    .attr(\"width\", width)\n    .attr(\"height\", height)\n    .attr(\"class\", \"RdYlGn\")\n  .append(\"g\")\n    .attr(\"transform\", \"translate(\" + ((width - cellSize * 53) / 2) + \",\" + (height - cellSize * 7 - 1) + \")\");\n\nsvg.append(\"text\")\n    .attr(\"transform\", \"translate(-6,\" + cellSize * 3.5 + \")rotate(-90)\")\n    .style(\"text-anchor\", \"middle\")\n    .text(function(d) { return d; });\n\nvar rect \u003d svg.selectAll(\".day\")\n    .data(function(d) { return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })\n  .enter().append(\"rect\")\n    .attr(\"class\", \"day\")\n    .attr(\"width\", cellSize)\n    .attr(\"height\", cellSize)\n    .attr(\"x\", function(d) { return d3.time.weekOfYear(d) * cellSize; })\n    .attr(\"y\", function(d) { return d.getDay() * cellSize; })\n    .datum(format);\n\nrect.append(\"title\")\n    .text(function(d) { return d; });\n\nsvg.selectAll(\".month\")\n    .data(function(d) { return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })\n  .enter().append(\"path\")\n    .attr(\"class\", \"month\")\n    .attr(\"d\", monthPath);\n\nd3.csv(\"https://gist.githubusercontent.com/mbostock/4063318/raw/c0923c4d3d8a6b693bb5c384bce33fc0374486f2/dji.csv\", function(error, csv) {\n  if (error) throw error;\n\n  var data \u003d d3.nest()\n    .key(function(d) { return d.Date; })\n    .rollup(function(d) { return (d[0].Close - d[0].Open) / d[0].Open; })\n    .map(csv);\n\n  rect.filter(function(d) { return d in data; })\n      .attr(\"class\", function(d) { return \"day \" + color(data[d]); })\n    .select(\"title\")\n      .text(function(d) { return d + \": \" + percent(data[d]); });\n});\n\nfunction monthPath(t0) {\n  var t1 \u003d new Date(t0.getFullYear(), t0.getMonth() + 1, 0),\n      d0 \u003d t0.getDay(), w0 \u003d d3.time.weekOfYear(t0),\n      d1 \u003d t1.getDay(), w1 \u003d d3.time.weekOfYear(t1);\n  return \"M\" + (w0 + 1) * cellSize + \",\" + d0 * cellSize\n      + \"H\" + w0 * cellSize + \"V\" + 7 * cellSize\n      + \"H\" + w1 * cellSize + \"V\" + (d1 + 1) * cellSize\n      + \"H\" + (w1 + 1) * cellSize + \"V\" + 0\n      + \"H\" + (w0 + 1) * cellSize + \"Z\";\n}\n\n\u003c/script\u003e"
+      },
+      "dateCreated": "Aug 2, 2016 8:56:08 PM",
+      "dateStarted": "Aug 2, 2016 9:40:35 PM",
+      "dateFinished": "Aug 2, 2016 9:40:35 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1470170321235_-1435641281",
+      "id": "20160802-203841_1418605528",
+      "dateCreated": "Aug 2, 2016 8:38:41 PM",
       "status": "READY",
       "progressUpdateIntervalMs": 500
     }
@@ -55,7 +200,9 @@
     "2BRM9NQ45200061469658681897": [],
     "2BT2752C1200061469658681894": []
   },
-  "config": {},
+  "config": {
+    "looknfeel": "default"
+  },
   "info": {},
   "source": "FCN"
 }
