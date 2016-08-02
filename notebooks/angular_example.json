@@ -1,0 +1,61 @@
+{
+  "paragraphs": [
+    {
+      "text": "%angular\n\n\u003cform class\u003d\"form-inline\"\u003e\n  \u003cdiv class\u003d\"form-group\"\u003e\n    \u003clabel for\u003d\"superheroId\"\u003eSuper Hero: \u003c/label\u003e\n    \u003cinput type\u003d\"text\" class\u003d\"form-control\" id\u003d\"superheroId\" placeholder\u003d\"Superhero name ...\" ng-model\u003d\"airport\"\u003e\u003c/input\u003e\n  \u003c/div\u003e\n  \u003cbutton type\u003d\"submit\" class\u003d\"btn btn-primary\" ng-click\u003d\"z.angularBind(\u0027airport\u0027,airport,\u002720160222-232336_1472609686\u0027)\"\u003e Bind\u003c/button\u003e\n\u003c/form\u003e",
+      "dateUpdated": "Aug 2, 2016 4:25:30 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1470096299117_-536340112",
+      "id": "20160802-000459_996163900",
+      "result": {
+        "code": "SUCCESS",
+        "type": "ANGULAR",
+        "msg": "\u003cform class\u003d\"form-inline\"\u003e\n  \u003cdiv class\u003d\"form-group\"\u003e\n    \u003clabel for\u003d\"superheroId\"\u003eSuper Hero: \u003c/label\u003e\n    \u003cinput type\u003d\"text\" class\u003d\"form-control\" id\u003d\"superheroId\" placeholder\u003d\"Superhero name ...\" ng-model\u003d\"airport\"\u003e\u003c/input\u003e\n  \u003c/div\u003e\n  \u003cbutton type\u003d\"submit\" class\u003d\"btn btn-primary\" ng-click\u003d\"z.angularBind(\u0027airport\u0027,airport,\u002720160222-232336_1472609686\u0027)\"\u003e Bind\u003c/button\u003e\n\u003c/form\u003e"
+      },
+      "dateCreated": "Aug 2, 2016 12:04:59 AM",
+      "dateStarted": "Aug 2, 2016 4:25:30 AM",
+      "dateFinished": "Aug 2, 2016 4:25:30 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1470111649384_-1096102521",
+      "id": "20160802-042049_1146289249",
+      "dateCreated": "Aug 2, 2016 4:20:49 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Angular Example",
+  "id": "FT5TMCFT1S1470096298",
+  "angularObjects": {
+    "2BRCG8WJ1200061469658681892": [],
+    "2BRMFVHFV200061469658681578": [],
+    "2BRM9NQ45200061469658681897": [],
+    "2BT2752C1200061469658681894": []
+  },
+  "config": {},
+  "info": {},
+  "source": "FCN"
+}
