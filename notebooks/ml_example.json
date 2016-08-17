@@ -198,8 +198,9 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%r\n# Fit a gaussian GLM model over the dataset.\nmodel \u003c- SparkR::glm(sepal_length ~ sepal_width + species, data \u003d df, family \u003d \"gaussian\")",
-      "dateUpdated": "Aug 17, 2016 8:47:39 PM",
+      "title": "Fit a gaussian GLM model over the dataset",
+      "text": "%r\nmodel \u003c- SparkR::glm(sepal_length ~ sepal_width + species, data \u003d df, family \u003d \"gaussian\")",
+      "dateUpdated": "Aug 17, 2016 8:51:21 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -212,7 +213,8 @@
           "groups": [],
           "scatter": {}
         },
-        "enabled": true
+        "enabled": true,
+        "title": true
       },
       "settings": {
         "params": {},
@@ -223,17 +225,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "# Fit a gaussian GLM model over the dataset.\n\n\nmodel \u003c- SparkR::glm(sepal_length ~ sepal_width + species, data \u003d df, family \u003d \"gaussian\")"
+        "msg": "model \u003c- SparkR::glm(sepal_length ~ sepal_width + species, data \u003d df, family \u003d \"gaussian\")"
       },
       "dateCreated": "Aug 17, 2016 8:01:43 PM",
-      "dateStarted": "Aug 17, 2016 8:47:39 PM",
-      "dateFinished": "Aug 17, 2016 8:47:41 PM",
+      "dateStarted": "Aug 17, 2016 8:51:21 PM",
+      "dateFinished": "Aug 17, 2016 8:51:23 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%r\n# Model summary are returned in a similar format to R\u0027s native glm().\nSparkR::summary(model)",
-      "dateUpdated": "Aug 17, 2016 8:47:44 PM",
+      "title": "Model summary are returned in a similar format to R\u0027s native glm()",
+      "text": "%r\nSparkR::summary(model)",
+      "dateUpdated": "Aug 17, 2016 8:51:55 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -246,7 +249,8 @@
           "groups": [],
           "scatter": {}
         },
-        "enabled": true
+        "enabled": true,
+        "title": true
       },
       "settings": {
         "params": {},
@@ -257,17 +261,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "# Model summary are returned in a similar format to R\u0027s native glm().\n\n\nSparkR::summary(model)\n\n$devianceResiduals\n Min      Max     \n -1.30727 1.412408\n\n$coefficients\n                   Estimate  Std. Error t value  Pr(\u003e|t|)    \n(Intercept)        2.260564  0.3676875  6.14806  7.120988e-09\nsepal_width        0.8032286 0.1060388  7.574857 3.785416e-12\nspecies_versicolor 1.450492  0.1112803  13.03458 0           \nspecies_virginica  1.938634  0.09939042 19.50524 0           \n"
+        "msg": "SparkR::summary(model)\n\n$devianceResiduals\n Min      Max     \n -1.30727 1.412408\n\n$coefficients\n                   Estimate  Std. Error t value  Pr(\u003e|t|)    \n(Intercept)        2.260564  0.3676875  6.14806  7.120988e-09\nsepal_width        0.8032286 0.1060388  7.574857 3.785416e-12\nspecies_versicolor 1.450492  0.1112803  13.03458 0           \nspecies_virginica  1.938634  0.09939042 19.50524 0           \n"
       },
       "dateCreated": "Aug 17, 2016 8:01:43 PM",
-      "dateStarted": "Aug 17, 2016 8:47:44 PM",
-      "dateFinished": "Aug 17, 2016 8:47:44 PM",
+      "dateStarted": "Aug 17, 2016 8:51:55 PM",
+      "dateFinished": "Aug 17, 2016 8:51:55 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%r\n# Make predictions based on the model.\npredictions \u003c- SparkR::predict(model, newData \u003d df)\nout \u003d SparkR::select(predictions, \"sepal_length\", \"prediction\")\nSparkR::head(out)",
-      "dateUpdated": "Aug 17, 2016 8:47:52 PM",
+      "title": "Make predictions based on the model",
+      "text": "%r\npredictions \u003c- SparkR::predict(model, newData \u003d df)\nout \u003d SparkR::select(predictions, \"sepal_length\", \"prediction\")\nSparkR::head(out)",
+      "dateUpdated": "Aug 17, 2016 8:52:16 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -303,7 +308,8 @@
             }
           }
         },
-        "enabled": true
+        "enabled": true,
+        "title": true
       },
       "settings": {
         "params": {},
@@ -317,8 +323,8 @@
         "msg": "sepal_length\tprediction\n5.1\t5.07186474904608\n4.9\t4.67025042559432\n4.7\t4.83089615497502\n4.6\t4.75057329028467\n5\t5.15218761373644\n5.4\t5.3931562078075"
       },
       "dateCreated": "Aug 17, 2016 8:01:43 PM",
-      "dateStarted": "Aug 17, 2016 8:47:52 PM",
-      "dateFinished": "Aug 17, 2016 8:47:52 PM",
+      "dateStarted": "Aug 17, 2016 8:52:16 PM",
+      "dateFinished": "Aug 17, 2016 8:52:16 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
