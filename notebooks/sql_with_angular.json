@@ -1,0 +1,202 @@
+{
+  "paragraphs": [
+    {
+      "text": "val airports \u003d sqlContext.sql(\"select distinct origin from default_qubole_airline_origin_destination limit 5\").collect().map(s\u003d\u003es(0))\nz.angularBind(\"selectedAirport\", \"none\")\nz.angularBind(\"airports\", airports)",
+      "dateUpdated": "Aug 23, 2016 4:12:52 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471968717594_1846645860",
+      "id": "20160823-161157_1663200600",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "airports: Array[Any] \u003d Array(\"BIS\", \"FNT\", \"STL\", \"ICT\", \"PLN\")\n"
+      },
+      "dateCreated": "Aug 23, 2016 4:11:57 PM",
+      "dateStarted": "Aug 23, 2016 4:12:52 PM",
+      "dateFinished": "Aug 23, 2016 4:13:55 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%angular\nPlease select an available airport \u003cselect ng-model\u003d\"selectedAirport\" ng-options\u003d\"o as o for o in airports\"\u003e\u003c/select\u003e",
+      "dateUpdated": "Aug 23, 2016 4:50:31 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471968772473_-480422757",
+      "id": "20160823-161252_135241951",
+      "result": {
+        "code": "SUCCESS",
+        "type": "ANGULAR",
+        "msg": "Please select an available airport \u003cselect ng-model\u003d\"selectedAirport\" ng-options\u003d\"o as o for o in airports\"\u003e\u003c/select\u003e"
+      },
+      "dateCreated": "Aug 23, 2016 4:12:52 PM",
+      "dateStarted": "Aug 23, 2016 4:50:31 PM",
+      "dateFinished": "Aug 23, 2016 4:50:31 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val selecteda: String \u003d z.angular(\"selectedAirport\").asInstanceOf[String]\nselecteda.replaceAll(\"\\\"\", \"\")",
+      "dateUpdated": "Aug 23, 2016 4:50:36 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "enabled": true,
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471968933488_-1565952646",
+      "id": "20160823-161533_813986610",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "selecteda: String \u003d \"BIS\"\nres27: String \u003d BIS\n"
+      },
+      "dateCreated": "Aug 23, 2016 4:15:33 PM",
+      "dateStarted": "Aug 23, 2016 4:50:36 PM",
+      "dateFinished": "Aug 23, 2016 4:50:37 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "if(selecteda \u003d\u003d \"none\") {\n    z.show(sqlContext.sql(\"select * from default_qubole_airline_origin_destination limit 100\"))\n} else {\n    z.show(sqlContext.sql(\"select * from default_qubole_airline_origin_destination where origin \u003d \u0027\" + selecteda + \"\u0027 limit 100\"))\n}",
+      "dateUpdated": "Aug 23, 2016 4:44:41 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "itinid",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "mktid",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "itinid",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "mktid",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471968951346_1730606578",
+      "id": "20160823-161551_1736340547",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "itinid\tmktid\tseqnum\tcoupons\tyear\tquarter\torigin\toriginaptind\torigincitynum\torigincountry\toriginstatefips\toriginstate\toriginstatename\toriginwac\tdest\tdestaptind\tdestcitynum\tdestcountry\tdeststatefips\tdeststate\tdeststatename\tdestwac\tbreak\tcoupontype\ttkcarrier\topcarrier\trpcarrier\tpassengers\tfareclass\tdistance\tdistancegroup\tgateway\titingeotype\tcoupongeotype\n\"200713517010\"\t\"200716304417\"\t4\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"ZW\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713409550\"\t\"200716112025\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"YV\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200713409551\"\t\"200716112027\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"YV\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200713413680\"\t\"200716119657\"\t3\t5\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"X\"\t\"D\"\t\"UA\"\t\"OO\"\t\"YV\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200713406118\"\t\"200716105763\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"YV\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200713406119\"\t\"200716105765\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"YV\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200713383498\"\t\"200716064623\"\t4\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713383892\"\t\"200716065369\"\t4\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713383893\"\t\"200716065371\"\t4\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713387710\"\t\"200716072269\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"YV\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200713387711\"\t\"200716072271\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"YV\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200713391968\"\t\"200716079884\"\t3\t5\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"YV\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200713374401\"\t\"200716047463\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713374402\"\t\"200716047465\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713375267\"\t\"200716049101\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713375456\"\t\"200716049448\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713375457\"\t\"200716049450\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"CO\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713375458\"\t\"200716049452\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713376769\"\t\"200716051956\"\t4\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"CO\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713376770\"\t\"200716051958\"\t4\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713376903\"\t\"200716052207\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713378350\"\t\"200716054937\"\t4\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713379171\"\t\"200716056499\"\t2\t3\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"GFK\"\t0\t33200\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"\"\t\"D\"\t\"--\"\t\"--\"\t\"XJ\"\t1.00\t\"\"\t186.00\t1\t0.00\t2\t2\n\"200713379365\"\t\"200716056866\"\t4\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"X\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713380160\"\t\"200716058352\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t2.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713380161\"\t\"200716058354\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713382292\"\t\"200716062403\"\t3\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713382293\"\t\"200716062406\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713365788\"\t\"200716031182\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713367400\"\t\"200716034252\"\t1\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713367401\"\t\"200716034254\"\t1\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713367402\"\t\"200716034256\"\t1\t2\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713367403\"\t\"200716034257\"\t1\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713368946\"\t\"200716037199\"\t4\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713369062\"\t\"200716037413\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713371982\"\t\"200716042977\"\t5\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"X\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713373268\"\t\"200716045328\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"D\"\t\"NW\"\t\"9E\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713373269\"\t\"200716045330\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713373270\"\t\"200716045332\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713373271\"\t\"200716045334\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XJ\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713373272\"\t\"200716045335\"\t3\t5\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"RAP\"\t0\t75020\t\"US\"\t\"46\"\t\"SD\"\t\"South Dakota\"\t67\t\"X\"\t\"D\"\t\"--\"\t\"--\"\t\"XJ\"\t1.00\t\"\"\t220.00\t1\t0.00\t2\t2\n\"200713293404\"\t\"200715901629\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"CO\"\t\"NW\"\t\"XE\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713274907\"\t\"200715868827\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"XE\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200713274908\"\t\"200715868829\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"CO\"\t\"NW\"\t\"XE\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200712853008\"\t\"200715142712\"\t4\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"MSP\"\t0\t57970\t\"US\"\t\"27\"\t\"MN\"\t\"Minnesota\"\t63\t\"\"\t\"A\"\t\"NW\"\t\"NW\"\t\"US\"\t1.00\t\"X\"\t386.00\t1\t0.00\t2\t2\n\"200712723691\"\t\"200714912464\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712723692\"\t\"200714912466\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712727214\"\t\"200714918932\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712731638\"\t\"200714926946\"\t3\t5\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"FSD\"\t0\t84300\t\"US\"\t\"46\"\t\"SD\"\t\"South Dakota\"\t67\t\"\"\t\"D\"\t\"--\"\t\"--\"\t\"UA\"\t1.00\t\"\"\t295.00\t1\t0.00\t2\t2\n\"200712734408\"\t\"200714931846\"\t4\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"X\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712735864\"\t\"200714934449\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712735865\"\t\"200714934451\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t2.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712735866\"\t\"200714934453\"\t3\t3\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"TUL\"\t0\t92080\t\"US\"\t\"40\"\t\"OK\"\t\"Oklahoma\"\t73\t\"X\"\t\"A\"\t\"NW\"\t\"NW\"\t\"UA\"\t1.00\t\"X\"\t772.00\t2\t0.00\t2\t2\n\"200712707334\"\t\"200714883046\"\t4\t5\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712713292\"\t\"200714893726\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712717134\"\t\"200714900459\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712717135\"\t\"200714900461\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719287\"\t\"200714904303\"\t3\t6\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"X\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719288\"\t\"200714904307\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719289\"\t\"200714904309\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719290\"\t\"200714904311\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719291\"\t\"200714904313\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719292\"\t\"200714904315\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719293\"\t\"200714904317\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719294\"\t\"200714904319\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719295\"\t\"200714904321\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719296\"\t\"200714904323\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719297\"\t\"200714904325\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712719298\"\t\"200714904327\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712685522\"\t\"200714842457\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712685523\"\t\"200714842459\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712685524\"\t\"200714842461\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712685525\"\t\"200714842462\"\t3\t5\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DTW\"\t2\t24260\t\"US\"\t\"26\"\t\"MI\"\t\"Michigan\"\t43\t\"X\"\t\"D\"\t\"--\"\t\"--\"\t\"UA\"\t1.00\t\"\"\t914.00\t2\t0.00\t2\t2\n\"200712670532\"\t\"200714815235\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672663\"\t\"200714819008\"\t3\t5\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"X\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672664\"\t\"200714819011\"\t3\t5\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672665\"\t\"200714819013\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t2.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672666\"\t\"200714819015\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t2.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672667\"\t\"200714819017\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672668\"\t\"200714819019\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672669\"\t\"200714819021\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672670\"\t\"200714819023\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672671\"\t\"200714819025\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672672\"\t\"200714819027\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672673\"\t\"200714819029\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712672674\"\t\"200714819031\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712674214\"\t\"200714821882\"\t5\t8\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"X\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712660514\"\t\"200714797211\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712660515\"\t\"200714797213\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712660516\"\t\"200714797215\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712660517\"\t\"200714797217\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712648704\"\t\"200714775850\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712648705\"\t\"200714775852\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712648706\"\t\"200714775854\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712648707\"\t\"200714775856\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712648708\"\t\"200714775858\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712648709\"\t\"200714775860\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712648710\"\t\"200714775862\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t2.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712648711\"\t\"200714775864\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n\"200712648712\"\t\"200714775866\"\t3\t4\t2007\t1\t\"BIS\"\t0\t11160\t\"US\"\t\"38\"\t\"ND\"\t\"North Dakota\"\t66\t\"DEN\"\t8\t24091\t\"US\"\t\"08\"\t\"CO\"\t\"Colorado\"\t82\t\"\"\t\"D\"\t\"UA\"\t\"OO\"\t\"UA\"\t1.00\t\"X\"\t517.00\t2\t0.00\t2\t2\n"
+      },
+      "dateCreated": "Aug 23, 2016 4:15:51 PM",
+      "dateStarted": "Aug 23, 2016 4:44:41 PM",
+      "dateFinished": "Aug 23, 2016 4:45:21 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1471968967150_228177448",
+      "id": "20160823-161607_1618556398",
+      "dateCreated": "Aug 23, 2016 4:16:07 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "SQL with Angular",
+  "id": "K1GBHZR8TQ1471968716",
+  "angularObjects": {
+    "2BUZSJYWA206821471481446565": [],
+    "2BTMTVUKX206821471481446420": [
+      {
+        "name": "airports",
+        "object": [
+          "\"BIS\"",
+          "\"FNT\"",
+          "\"STL\"",
+          "\"ICT\"",
+          "\"PLN\""
+        ],
+        "noteId": "K1GBHZR8TQ1471968716"
+      },
+      {
+        "name": "selectedAirport",
+        "object": "\"BIS\"",
+        "noteId": "K1GBHZR8TQ1471968716"
+      }
+    ],
+    "2BVKUR8Q5206821471481446543": [],
+    "2BSTEGTKM206821471481446539": []
+  },
+  "config": {},
+  "info": {},
+  "source": "FCN"
+}
