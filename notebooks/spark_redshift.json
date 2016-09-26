@@ -1,0 +1,266 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\nReading Redshift Data using Qubole Spark\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nWe use the [spark-redshift](https://github.com/databricks/spark-redshift) module to read large datasets that you may have in your Amazon Redshift cluster. For this note to run successfully you need to load a couple of dependencies into Zeppelin before the spark interpreter has started up. We will also use the redshift jdbc jar provided by AWS to talk to our Redshift cluster.\n\nStep 1\n------\nDownload the JDBC jar into Zeppelin\n    %sh\n    curl -sL https://s3.amazonaws.com/redshift-downloads/drivers/RedshiftJDBC41-1.1.10.1010.jar -o /tmp/RedshiftJDBC41-1.1.10.1010.jar\n    \nStep 2\n------\nRestart the spark interpreter *(Interpreter \u003e restart)* and load the dependencies\n\n    %dep\n    z.load(\"com.databricks:spark-redshift_2.10:0.5.2\")\n    z.load(\"/tmp/RedshiftJDBC41-1.1.10.1010.jar\")\n    \nStep 3\n------\n\n    import org.apache.spark._\n    import com.databricks.spark.redshift._\n     \n     // A temporary bucket with auto-expiry of objects which spark-redshift uses for reads-writes\n     // Ensure that the bucket is in the region where your redshift cluster resides\n    val tmpBucket \u003d \"s3n://spark-temporary/tmp\"\n\n    val jdbcUsername \u003d \"\u003cusername\u003e\" // jdbc username of redshift cluster\n    val jdbcPassword \u003d \"\u003cpassword\u003e\" // jdbc password\n    val jdbcHostname \u003d \"inventory.c123asdfq.us-east-1.redshift.amazonaws.com\" // redshift cluster hostname found in your aws console\n    val jdbcPort \u003d 5439\n    val jdbcDatabase \u003d \"testdb\"\n\n    val jdbcUrl \u003d s\"jdbc:redshift://$jdbcHostname:$jdbcPort/$jdbcDatabase?user\u003d$jdbcUsername\u0026password\u003d$jdbcPassword\"\n    val memetracker \u003d sqlContext.read\n      .format(\"com.databricks.spark.redshift\")\n      .option(\"url\", jdbcUrl)\n      .option(\"tempdir\", tmpBucket)    // specify the s3 bucket for temporary data here\n      .option(\"dbtable\", \"\u003cproducts\u003e\") // products is a sample table in your inventory database on redshift\n      .load()",
+      "dateUpdated": "Dec 24, 2015 9:23:52 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1450933284716_-1689536010",
+      "id": "20151224-050124_2141857172",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch1\u003eReading Redshift Data using Qubole Spark\u003c/h1\u003e\n\u003cp\u003eWe use the \u003ca href\u003d\"https://github.com/databricks/spark-redshift\"\u003espark-redshift\u003c/a\u003e module to read large datasets that you may have in your Amazon Redshift cluster. For this note to run successfully you need to load a couple of dependencies into Zeppelin before the spark interpreter has started up. We will also use the redshift jdbc jar provided by AWS to talk to our Redshift cluster.\u003c/p\u003e\n\u003ch2\u003eStep 1\u003c/h2\u003e\n\u003cp\u003eDownload the JDBC jar into Zeppelin\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e%sh\ncurl -sL https://s3.amazonaws.com/redshift-downloads/drivers/RedshiftJDBC41-1.1.10.1010.jar -o /tmp/RedshiftJDBC41-1.1.10.1010.jar\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eStep 2\u003c/h2\u003e\n\u003cp\u003eRestart the spark interpreter \u003cem\u003e(Interpreter \u003e restart)\u003c/em\u003e and load the dependencies\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e%dep\nz.load(\"com.databricks:spark-redshift_2.10:0.5.2\")\nz.load(\"/tmp/RedshiftJDBC41-1.1.10.1010.jar\")\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2\u003eStep 3\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003eimport org.apache.spark._\nimport com.databricks.spark.redshift._\n\n // A temporary bucket with auto-expiry of objects which spark-redshift uses for reads-writes\n // Ensure that the bucket is in the region where your redshift cluster resides\nval tmpBucket \u003d \"s3n://spark-temporary/tmp\"\n\nval jdbcUsername \u003d \"\u0026lt;username\u0026gt;\" // jdbc username of redshift cluster\nval jdbcPassword \u003d \"\u0026lt;password\u0026gt;\" // jdbc password\nval jdbcHostname \u003d \"inventory.c123asdfq.us-east-1.redshift.amazonaws.com\" // redshift cluster hostname found in your aws console\nval jdbcPort \u003d 5439\nval jdbcDatabase \u003d \"testdb\"\n\nval jdbcUrl \u003d s\"jdbc:redshift://$jdbcHostname:$jdbcPort/$jdbcDatabase?user\u003d$jdbcUsername\u0026amp;password\u003d$jdbcPassword\"\nval memetracker \u003d sqlContext.read\n  .format(\"com.databricks.spark.redshift\")\n  .option(\"url\", jdbcUrl)\n  .option(\"tempdir\", tmpBucket)    // specify the s3 bucket for temporary data here\n  .option(\"dbtable\", \"\u0026lt;products\u0026gt;\") // products is a sample table in your inventory database on redshift\n  .load()\n\u003c/code\u003e\u003c/pre\u003e\n"
+      },
+      "dateCreated": "Dec 24, 2015 5:01:24 AM",
+      "dateStarted": "Dec 24, 2015 9:16:24 AM",
+      "dateFinished": "Dec 24, 2015 9:16:24 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Step1",
+      "text": "%sh\ncurl -sL https://s3.amazonaws.com/redshift-downloads/drivers/RedshiftJDBC41-1.1.10.1010.jar -o /tmp/RedshiftJDBC41-1.1.10.1010.jar",
+      "dateUpdated": "Dec 24, 2015 9:17:31 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/sh",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1450880699272_-1555749852",
+      "id": "20151223-142459_1709514074",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": ""
+      },
+      "dateCreated": "Dec 23, 2015 2:24:59 PM",
+      "dateStarted": "Dec 24, 2015 9:17:31 AM",
+      "dateFinished": "Dec 24, 2015 9:17:31 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Step2",
+      "text": "%dep\nz.load(\"com.databricks:spark-redshift_2.10:0.5.2\")\nz.load(\"/tmp/RedshiftJDBC41-1.1.10.1010.jar\")",
+      "dateUpdated": "Dec 24, 2015 9:17:34 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1450880427488_-1642301386",
+      "id": "20151223-142027_1182243736",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res0: org.apache.zeppelin.spark.dep.Dependency \u003d org.apache.zeppelin.spark.dep.Dependency@53bffeaf\n"
+      },
+      "dateCreated": "Dec 23, 2015 2:20:27 PM",
+      "dateStarted": "Dec 24, 2015 9:17:34 AM",
+      "dateFinished": "Dec 24, 2015 9:17:43 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Step3",
+      "text": "import org.apache.spark._\nimport com.databricks.spark.redshift._\nimport sys.process._\n\nval tmpBucket \u003d z.input(\"tmpBucket\", \"s3://spark-redshift/tmp\").toString()\nval jdbcUsername \u003d z.input(\"jdbcUsername\", \"root\")\nval jdbcPassword \u003d  z.input(\"jdbcPassword\", \"password\")\nval jdbcHostname \u003d z.input(\"jdbcHostname\")\nval jdbcPort \u003d 5439\nval jdbcDatabase \u003d z.input(\"jdbcDatabase\", \"testdb\")\n\nval jdbcUrl \u003d s\"jdbc:redshift://${jdbcHostname}:${jdbcPort}/${jdbcDatabase}?user\u003d${jdbcUsername}\u0026password\u003d${jdbcPassword}\"\nval tbl \u003d sqlContext.read\n  .format(\"com.databricks.spark.redshift\")\n  .option(\"url\", jdbcUrl)\n  .option(\"tempdir\", tmpBucket)\n  .option(\"dbtable\", z.input(\"redshift_tbl\").toString())\n  .load()\n\ntbl.registerTempTable(\"tmp_nation\")",
+      "dateUpdated": "Dec 24, 2015 9:19:00 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala",
+        "tableHide": false,
+        "editorHide": false,
+        "title": true
+      },
+      "settings": {
+        "params": {
+          "a": "test",
+          "jdbcDatabase": "testdb",
+          "jdbcHostname": "",
+          "jdbcPassword": "password",
+          "jdbcUsername": "root",
+          "tmpBucket": "s3://spark-redshift/tmp"
+        },
+        "forms": {
+          "tmpBucket": {
+            "name": "tmpBucket",
+            "displayName": "tmpBucket",
+            "defaultValue": "s3://spark-redshift/tmp",
+            "hidden": false
+          },
+          "jdbcUsername": {
+            "name": "jdbcUsername",
+            "displayName": "jdbcUsername",
+            "defaultValue": "root",
+            "hidden": false
+          },
+          "jdbcPassword": {
+            "name": "jdbcPassword",
+            "displayName": "jdbcPassword",
+            "defaultValue": "password",
+            "hidden": false
+          },
+          "jdbcHostname": {
+            "name": "jdbcHostname",
+            "displayName": "jdbcHostname",
+            "defaultValue": "",
+            "hidden": false
+          },
+          "jdbcDatabase": {
+            "name": "jdbcDatabase",
+            "displayName": "jdbcDatabase",
+            "defaultValue": "testdb",
+            "hidden": false
+          },
+          "redshift_tbl": {
+            "name": "redshift_tbl",
+            "displayName": "redshift_tbl",
+            "defaultValue": "",
+            "hidden": false
+          }
+        }
+      },
+      "jobName": "paragraph_1450880472030_455996522",
+      "id": "20151223-142112_1338745897",
+      "result": {},
+      "dateCreated": "Dec 23, 2015 2:21:12 PM",
+      "dateStarted": "Dec 24, 2015 9:19:00 AM",
+      "dateFinished": "Dec 24, 2015 9:19:04 AM",
+      "status": "ERROR",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\nSELECT * FROM tmp_nation",
+      "dateUpdated": "Dec 24, 2015 8:47:35 AM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "n_nationkey",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "n_name",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "n_nationkey",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "n_name",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1450935342918_-1729038740",
+      "id": "20151224-053542_101863487",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "n_nationkey\tn_name\tn_regionkey\tn_comment\n1\tARGENTINA\t1\t1al foxes promise slyly according to the regular accounts. bold requests alon\n2\tBRAZIL\t1\ty alongside of the pending deposits. carefully special packages are about the ironic forges. slyly special\n5\tETHIOPIA\t0\tven packages wake quickly. regu\n7\tGERMANY\t3\tl platelets. regular accounts x-ray: unusual, regular acco\n9\tINDONESIA\t2\t slyly express asymptotes. regular deposits haggle slyly. carefully ironic hockey players sleep blithely. carefull\n0\tALGERIA\t0\thaggle. carefully final deposits detect slyly agai\n3\tCANADA\t1\teas hang ironic, silent packages. slyly regular packages are furiously over the tithes. fluffily bold\n4\tEGYPT\t4\ty above the carefully unusual theodolites. final dugouts are quickly across the furiously regular d\n6\tFRANCE\t3\trefully final requests. regular, ironi\n8\tINDIA\t2\tss excuses cajole slyly across the packages. deposits print aroun\n10\tIRAN\t4\tefully alongside of the slyly final dependencies.\n"
+      },
+      "dateCreated": "Dec 24, 2015 5:35:42 AM",
+      "dateStarted": "Dec 24, 2015 8:47:35 AM",
+      "dateFinished": "Dec 24, 2015 8:47:36 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1450944988779_-263984227",
+      "id": "20151224-081628_8232285",
+      "dateCreated": "Dec 24, 2015 8:16:28 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Spark + Redshift",
+  "id": "2JVJA1KFNA1454520910",
+  "angularObjects": {
+    "2B26AKPVY": [],
+    "2B2QZ5BMN": [],
+    "2B3DNDG6T": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {},
+  "source": "FCN"
+}
