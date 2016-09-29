@@ -2,7 +2,7 @@
   "paragraphs": [
     {
       "text": "%dep\nz.load(\"com.databricks:spark-csv_2.10:1.2.0\")",
-      "dateUpdated": "Aug 17, 2016 8:07:37 PM",
+      "dateUpdated": "Sep 29, 2016 2:34:10 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -26,17 +26,17 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "DepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@35fccbab\n"
+        "msg": "DepInterpreter(%dep) deprecated. Load dependency through GUI interpreter menu instead.\nres1: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@94b0cf8\n"
       },
       "dateCreated": "Aug 17, 2016 8:06:16 PM",
-      "dateStarted": "Aug 17, 2016 8:07:39 PM",
-      "dateFinished": "Aug 17, 2016 8:07:48 PM",
+      "dateStarted": "Sep 29, 2016 2:34:10 PM",
+      "dateFinished": "Sep 29, 2016 2:34:11 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "sc.version\nsqlContext",
-      "dateUpdated": "Aug 17, 2016 8:08:24 PM",
+      "dateUpdated": "Sep 29, 2016 2:34:15 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -60,18 +60,18 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "res0: String \u003d 1.6.1\nres1: org.apache.spark.sql.SQLContext \u003d org.apache.spark.sql.hive.HiveContext@3a8fd75\n"
+        "msg": "res0: String \u003d 1.6.1\nres1: org.apache.spark.sql.SQLContext \u003d org.apache.spark.sql.hive.HiveContext@474a0031\n"
       },
       "dateCreated": "Aug 17, 2016 8:01:43 PM",
-      "dateStarted": "Aug 17, 2016 8:08:24 PM",
-      "dateFinished": "Aug 17, 2016 8:09:11 PM",
+      "dateStarted": "Sep 29, 2016 2:34:15 PM",
+      "dateFinished": "Sep 29, 2016 2:35:05 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Download CSV data to Cluster Master",
-      "text": "%sh\nwget -O /media/ephemeral0/iris.csv https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv",
-      "dateUpdated": "Aug 17, 2016 8:39:14 PM",
+      "text": "%sh\nwget -O /media/ephemeral0/iris.csv https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv\nhdfs dfs -put /media/ephemeral0/iris.csv /tmp/iris.csv",
+      "dateUpdated": "Sep 29, 2016 3:13:58 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -99,15 +99,15 @@
         "msg": ""
       },
       "dateCreated": "Aug 17, 2016 8:33:25 PM",
-      "dateStarted": "Aug 17, 2016 8:37:03 PM",
-      "dateFinished": "Aug 17, 2016 8:37:04 PM",
+      "dateStarted": "Sep 29, 2016 3:13:58 PM",
+      "dateFinished": "Sep 29, 2016 3:14:00 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Create Temp Table",
-      "text": "%r\ndf1 \u003c- read.df(sqlContext, \"/media/ephemeral0/iris.csv\", source \u003d \"com.databricks.spark.csv\", header\u003d\"true\", inferSchema\u003d\"true\") \nprintSchema(df1)\nregisterTempTable(df1, \"df\")\n\ndf \u003c- sql(sqlContext,\"select sepal_length,sepal_width,petal_length,petal_width,species from df\")\nSparkR::head(df)",
-      "dateUpdated": "Aug 17, 2016 8:47:32 PM",
+      "text": "%r\ndf1 \u003c- read.df(sqlContext, \"/tmp/iris.csv\", source \u003d \"com.databricks.spark.csv\", header\u003d\"true\", inferSchema\u003d\"true\") \nprintSchema(df1)\nregisterTempTable(df1, \"df\")\n\ndf \u003c- sql(sqlContext,\"select sepal_length,sepal_width,petal_length,petal_width,species from df\")\nSparkR::head(df)",
+      "dateUpdated": "Sep 29, 2016 3:14:20 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -158,14 +158,14 @@
         "msg": "sepal_length\tsepal_width\tpetal_length\tpetal_width\tspecies\n5.1\t3.5\t1.4\t0.2\tsetosa\n4.9\t3\t1.4\t0.2\tsetosa\n4.7\t3.2\t1.3\t0.2\tsetosa\n4.6\t3.1\t1.5\t0.2\tsetosa\n5\t3.6\t1.4\t0.2\tsetosa\n5.4\t3.9\t1.7\t0.4\tsetosa"
       },
       "dateCreated": "Aug 17, 2016 8:01:43 PM",
-      "dateStarted": "Aug 17, 2016 8:47:33 PM",
-      "dateFinished": "Aug 17, 2016 8:47:33 PM",
+      "dateStarted": "Sep 29, 2016 3:14:20 PM",
+      "dateFinished": "Sep 29, 2016 3:15:30 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%r\ndf",
-      "dateUpdated": "Aug 17, 2016 8:32:40 PM",
+      "dateUpdated": "Sep 29, 2016 3:15:41 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -192,15 +192,15 @@
         "msg": "df\n\nDataFrame[sepal_length:double, sepal_width:double, petal_length:double, petal_width:double, species:string]\n"
       },
       "dateCreated": "Aug 17, 2016 8:01:43 PM",
-      "dateStarted": "Aug 17, 2016 8:32:40 PM",
-      "dateFinished": "Aug 17, 2016 8:32:41 PM",
+      "dateStarted": "Sep 29, 2016 3:15:41 PM",
+      "dateFinished": "Sep 29, 2016 3:15:41 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Fit a gaussian GLM model over the dataset",
       "text": "%r\nmodel \u003c- SparkR::glm(sepal_length ~ sepal_width + species, data \u003d df, family \u003d \"gaussian\")",
-      "dateUpdated": "Aug 17, 2016 8:51:21 PM",
+      "dateUpdated": "Sep 29, 2016 3:15:44 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -228,15 +228,15 @@
         "msg": "model \u003c- SparkR::glm(sepal_length ~ sepal_width + species, data \u003d df, family \u003d \"gaussian\")"
       },
       "dateCreated": "Aug 17, 2016 8:01:43 PM",
-      "dateStarted": "Aug 17, 2016 8:51:21 PM",
-      "dateFinished": "Aug 17, 2016 8:51:23 PM",
+      "dateStarted": "Sep 29, 2016 3:15:44 PM",
+      "dateFinished": "Sep 29, 2016 3:15:49 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Model summary are returned in a similar format to R\u0027s native glm()",
-      "text": "%r\nSparkR::summary(model)",
-      "dateUpdated": "Aug 17, 2016 8:51:55 PM",
+      "text": "%r\nSparkR:::summary(model)",
+      "dateUpdated": "Sep 29, 2016 3:15:51 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -261,23 +261,23 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "SparkR::summary(model)\n\n$devianceResiduals\n Min      Max     \n -1.30727 1.412408\n\n$coefficients\n                   Estimate  Std. Error t value  Pr(\u003e|t|)    \n(Intercept)        2.260564  0.3676875  6.14806  7.120988e-09\nsepal_width        0.8032286 0.1060388  7.574857 3.785416e-12\nspecies_versicolor 1.450492  0.1112803  13.03458 0           \nspecies_virginica  1.938634  0.09939042 19.50524 0           \n"
+        "msg": "SparkR:::summary(model)\n\n$devianceResiduals\n Min      Max     \n -1.30727 1.412408\n\n$coefficients\n                   Estimate  Std. Error t value  Pr(\u003e|t|)    \n(Intercept)        2.260564  0.3676875  6.14806  7.120988e-09\nsepal_width        0.8032286 0.1060388  7.574857 3.785416e-12\nspecies_versicolor 1.450492  0.1112803  13.03458 0           \nspecies_virginica  1.938634  0.09939042 19.50524 0           \n"
       },
       "dateCreated": "Aug 17, 2016 8:01:43 PM",
-      "dateStarted": "Aug 17, 2016 8:51:55 PM",
-      "dateFinished": "Aug 17, 2016 8:51:55 PM",
+      "dateStarted": "Sep 29, 2016 3:15:51 PM",
+      "dateFinished": "Sep 29, 2016 3:15:52 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "title": "Make predictions based on the model",
       "text": "%r\npredictions \u003c- SparkR::predict(model, newData \u003d df)\nout \u003d SparkR::select(predictions, \"sepal_length\", \"prediction\")\nSparkR::head(out)",
-      "dateUpdated": "Aug 17, 2016 8:52:16 PM",
+      "dateUpdated": "Sep 23, 2016 8:37:33 PM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
         "graph": {
-          "mode": "table",
+          "mode": "multiBarChart",
           "height": 300.0,
           "optionOpen": false,
           "keys": [
@@ -323,8 +323,8 @@
         "msg": "sepal_length\tprediction\n5.1\t5.07186474904608\n4.9\t4.67025042559432\n4.7\t4.83089615497502\n4.6\t4.75057329028467\n5\t5.15218761373644\n5.4\t5.3931562078075"
       },
       "dateCreated": "Aug 17, 2016 8:01:43 PM",
-      "dateStarted": "Aug 17, 2016 8:52:16 PM",
-      "dateFinished": "Aug 17, 2016 8:52:16 PM",
+      "dateStarted": "Aug 17, 2016 9:46:00 PM",
+      "dateFinished": "Aug 17, 2016 9:46:00 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -375,13 +375,15 @@
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "ML Examples",
+  "name": "DEMO_ML",
   "id": "2BV1HAR3Y206341471464103342",
   "angularObjects": {
-    "2BT88SPTG206341471392213540": [],
-    "2BSN3JHJT206341471392213490": [],
-    "2BTWB24N1206341471392213544": []
+    "2BUZSJYWA206821471481446565": [],
+    "2BTMTVUKX206821471481446420": [],
+    "2BVKUR8Q5206821471481446543": [],
+    "2BSTEGTKM206821471481446539": []
   },
   "config": {},
-  "info": {}
+  "info": {},
+  "source": "FCN"
 }
