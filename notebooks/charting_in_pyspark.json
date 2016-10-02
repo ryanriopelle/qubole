@@ -198,7 +198,8 @@
       "progressUpdateIntervalMs": 500
     },
     {
-      "dateUpdated": "Aug 17, 2016 10:14:57 PM",
+      "text": "%pyspark\nfrom pyspark import SparkContext, SparkConf\nfrom pyspark.sql import HiveContext\nfrom pyspark.sql.functions import lit\nfrom pyspark.sql.types import *\n\nsqlContext \u003d HiveContext(sc)\ndf \u003d sqlContext.sql(\"\"\" select dest, count(*), avg(distance) from default_qubole_airline_origin_destination where origin \u003d \u0027SFO\u0027 group by dest limit 100\"\"\")\ndf.show()",
+      "dateUpdated": "Oct 2, 2016 5:07:53 AM",
       "config": {
         "colWidth": 12.0,
         "editorMode": "ace/mode/scala",
@@ -219,19 +220,39 @@
       },
       "jobName": "paragraph_1471472097025_-641649432",
       "id": "20160817-221457_1730695077",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "+----+---+---+\n|dest|_c1|_c2|\n+----+---+---+\n+----+---+---+\n\n"
+      },
       "dateCreated": "Aug 17, 2016 10:14:57 PM",
+      "dateStarted": "Oct 2, 2016 5:07:55 AM",
+      "dateFinished": "Oct 2, 2016 5:10:06 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1475384873403_575817299",
+      "id": "20161002-050753_825931072",
+      "dateCreated": "Oct 2, 2016 5:07:53 AM",
       "status": "READY",
-      "errorMessage": "",
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "ChartingInPyspark",
+  "name": "DEMO_ChartingInPyspark",
   "id": "2BT5BYXSF206341471472097021",
   "angularObjects": {
-    "2BT88SPTG206341471392213540": [],
-    "2BSN3JHJT206341471392213490": [],
-    "2BTWB24N1206341471392213544": []
+    "2BUZSJYWA206821471481446565": [],
+    "2BTMTVUKX206821471481446420": [],
+    "2BVKUR8Q5206821471481446543": [],
+    "2BSTEGTKM206821471481446539": []
   },
   "config": {},
-  "info": {}
+  "info": {},
+  "source": "FCN"
 }
