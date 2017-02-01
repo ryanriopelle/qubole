@@ -1,8 +1,8 @@
 {
   "paragraphs": [
     {
-      "text": "z.angularBind(\"name\", \"Jove\")",
-      "dateUpdated": "Feb 1, 2017 5:38:39 PM",
+      "text": "z.angularBind(\"name\", \"Ryan\")",
+      "dateUpdated": "Feb 1, 2017 6:00:40 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -31,14 +31,14 @@
         "msg": ""
       },
       "dateCreated": "Aug 4, 2016 9:43:19 PM",
-      "dateStarted": "Feb 1, 2017 5:38:39 PM",
-      "dateFinished": "Feb 1, 2017 5:38:40 PM",
+      "dateStarted": "Feb 1, 2017 6:00:40 PM",
+      "dateFinished": "Feb 1, 2017 6:00:40 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "println(\"%angular \u003ch3\u003eHello {{name}}\u003c/h3\u003e\")",
-      "dateUpdated": "Feb 1, 2017 5:37:26 PM",
+      "dateUpdated": "Feb 1, 2017 6:00:45 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -67,8 +67,8 @@
         "msg": "\u003ch3\u003eHello {{name}}\u003c/h3\u003e\n"
       },
       "dateCreated": "Aug 4, 2016 9:36:38 PM",
-      "dateStarted": "Feb 1, 2017 5:37:26 PM",
-      "dateFinished": "Feb 1, 2017 5:38:26 PM",
+      "dateStarted": "Feb 1, 2017 6:00:45 PM",
+      "dateFinished": "Feb 1, 2017 6:00:45 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
@@ -418,7 +418,7 @@
       },
       {
         "name": "name",
-        "object": "Jove",
+        "object": "Ryan",
         "noteId": "1SCB36B89C1485967868"
       }
     ]
